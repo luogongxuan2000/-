@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.UserMapper">
+
+
+    <select id="findByUserNameAndPassword" resultType="user">
+        SELECT * from sys_user where tel = #{tel} and password = #{password}
+    </select>
+
+    <select id="findByTel" resultType="user">
+        SELECT * from sys_user where tel = #{tel}
+    </select>
+
+    <insert id="insert" parameterType="user">
+        insert into sys_user(id,tel,password,email
+          <if test="invitation != null and invitation !='' ">
+              ,invitation
+          </if>
+        ) values (null,#{tel},#{password},#{email}
+          <if test="invitation != null and invitation !='' ">
+              ,#{invitation}
+          </if>
+        )
+    </insert>
+</mapper>
